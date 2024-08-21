@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="SMS Automation Suite">
+    <test name="Centre Management Test">
+        <classes>
+            <class name="CentreManagement.CentreManagementTest"/>
+        </classes>
+    </test>
+    <test name="Course Management Test">
+        <classes>
+            <class name="SMSAdmin.SMSAdminTest"/>
+        </classes>
+    </test>
+</suite>
