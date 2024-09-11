@@ -23,6 +23,7 @@ public class CentreManagementCommonMethods extends BaseClass {
 
     public static String centreAdd() throws AWTException, InterruptedException {
         js = (JavascriptExecutor) driver;
+
         // traversing to centre index page
         CentreManagementPage.centreManagementMenu.click();
         CentreManagementPage.centreListingMenu.click();
