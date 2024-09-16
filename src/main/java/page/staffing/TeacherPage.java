@@ -3,7 +3,10 @@ package page.staffing;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.logging.XMLFormatter;
+
 public class TeacherPage {
+
     @FindBy(xpath = "//span[text()='Staffing']")
     public static WebElement staffingMenu;
     @FindBy(xpath = "//span[text()='Teacher']")
@@ -11,48 +14,54 @@ public class TeacherPage {
     @FindBy(xpath = "//button[text()='Add ']")
     public static WebElement addTeacherButton;
     @FindBy(name = "teacherName")
-    public static WebElement teacherNameInput;
+    public static WebElement teacherName;
     @FindBy(name = "dateOfBirth")
-    public static WebElement dateOfBirthInput;
-    @FindBy(xpath = "//select[@name='idType']")
-    public static WebElement idTypeDropDown;
+    public static WebElement teacherDateOfBirth;
+    @FindBy(xpath = "//select[@name='idTypeId']")
+    public static WebElement teacherIdType;
     @FindBy(name = "idNo")
-    public static WebElement idNoInput;
+    public static WebElement teacherIdNo;
     @FindBy(name = "citizenship")
-    public static WebElement citizenshipDropDown;
-    @FindBy(xpath = "//input[@id='male']")
-    public static WebElement maleGender;
+    public static WebElement teacherCitizenship;
     @FindBy(name = "file")
     public static WebElement teacherProfileImage;
+    @FindBy(xpath = "//input[@name='email']")
+    public static WebElement teacherEmailId;
+    @FindBy(xpath = "//input[@name='password']")
+    public static WebElement teacherEmailIdPassword;
+    @FindBy(xpath = "//input[@name='confirmPassword']")
+    public static WebElement teacherEmailIdConfirmPwd;
+    @FindBy(xpath = "//input[@id='female']")
+    public static WebElement teacherGenderFemale;
+    @FindBy(name = "shortIntroduction")
+    public static WebElement teacherShortIntroduction;
     @FindBy(xpath = "//button[text()=' Save And Next']")
     public static WebElement saveAndNextButton;
     @FindBy(name = "startDate")
-    public static WebElement startDateInput;
+    public static WebElement startDateOfWorking;
     @FindBy(name = "teacherId")
     public static WebElement teacherIdInput;
-    @FindBy(name = "teacherType")
+    @FindBy(xpath = "//select[@name='teacherType' and option[text()='Temporary']]")
     public static WebElement teacherTypeDropDown;
-    @FindBy(name = "shgType")
+    @FindBy(xpath = "//select[@name='shgTypeId' and option[text()='Less than 5000']]")
     public static WebElement shgTypeDropDown;
-    @FindBy(name = "shgAmount")
-    public static WebElement shgAmountInput;
-    @FindBy(xpath = "//input[@name='approvelContentRequired' and @value ='Yes']")
-    public static WebElement yesApprovalContentRequired;
-    @FindBy(xpath = "//input[@name='workingDays' and @value='MONDAY']")
+    @FindBy(xpath = "//input[@value='Yes']")
+    public static WebElement yesApproval;
+    @FindBy(xpath = "//input[@id='myCheckbox1']")
     public static WebElement workingDaysCheckbox;
-    @FindBy(name = "email")
-    public static WebElement emailInput;
     @FindBy(name = "contactNumber")
     public static WebElement contactNumberInput;
-    @FindBy(name = "address")
+    @FindBy(xpath = "//textarea[@name='address']")
     public static WebElement addressInput;
     @FindBy(name = "postalCode")
     public static WebElement postalCodeInput;
-    @FindBy(name = "password")
-    public static WebElement passwordInput;
-    @FindBy(name = "confirmPassword")
-    public static WebElement confirmPasswordInput;
-    @FindBy(name = "year")
+    @FindBy(xpath = "//input[@name='salary']")
+    public static WebElement salary;
+    @FindBy(xpath = "//input[@name='effectiveDate']")
+    public static WebElement salaryEffectiveDate;
+    @FindBy(xpath = "//select[@name='salaryTypeId']")
+    public static WebElement salaryType;
+    @FindBy(xpath = "//input[@name='year']")
     public static WebElement yearInput;
     @FindBy(name = "annualLeave")
     public static WebElement annualLeaveInput;
@@ -62,14 +71,32 @@ public class TeacherPage {
     public static WebElement otherLeaveInput;
     @FindBy(name = "carryForwardLeave")
     public static WebElement carryForwardLeave;
-    @FindBy(name = "employer")
+    @FindBy(xpath = "//select[@name='employer'] | option[text()='Centre_Add']")
     public static WebElement employerInput;
-    @FindBy(name = "uen")
+    @FindBy(xpath = "//input[@name='uen']")
     public static WebElement uenInput;
-    @FindBy(name = "addressOfEmployment")
-    public static WebElement addressOfEmploymentInput;
-    @FindBy(name = "nric")
-    public static WebElement nricInput;
-    @FindBy(name = "jobTitle")
-    public static WebElement jobTitleInput;
+    @FindBy(xpath = "//input[@name='addressOfEmployment']")
+    public static WebElement addressOfEmployment;
+    @FindBy(xpath = "//input[@name='nric']")
+    public static WebElement nricOfEmployee;
+    @FindBy(xpath = "//input[@name='jobTitle']")
+    public static WebElement jobTitle;
+    @FindBy(xpath = "//input[@name='mainDuties']")
+    public static WebElement mainDuties;
+    @FindBy(xpath = "//input[@name='training']")
+    public static WebElement training;
+    @FindBy(xpath = "//input[@name='allowance']")
+    public static WebElement allowance;
+    @FindBy(xpath = "//input[@name='userContractEndDate']")
+    public static WebElement employeeContractEndDate;
+    @FindBy(xpath = "//input[@name='probation']")
+    public static WebElement probation;
+    @FindBy(xpath = "//input[@name='payNow']")
+    public static WebElement payNowDetails;
+    @FindBy(xpath = "//input[@name='internetBanking']")
+    public static WebElement internetBanking;
+    @FindBy(xpath = "//input[@name='terminationNotice']")
+    public static WebElement terminationNotice;
+    @FindBy(xpath = "//button[text()='Submit']")
+    public static WebElement submitTeacherButton;
 }

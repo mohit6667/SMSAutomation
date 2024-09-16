@@ -1,26 +1,34 @@
 package constants.staffing;
 
 public class TeacherConstants {
-    public static String teacherName = "Teacher_ABD";
-    public static String teacherDateOfBirth = "01-01-1979";
-    public static String teacherIdNumber = "78945620";
-    public static String teacherImageFile = "\\src\\main\\java\\report\\qrCode.jpg";
-    public static String startDate = "01-08-2024";
-    public static String teacherId = "Teacher_ID";
-    public static String teacherEmail = "teachers13@gmail.com";
-    public static String pinCode = "625108";
-    public static String contactNumber = "9534569821";
-    public static String address = "11A,Boston st";
-    public static String password = "testtest";
-    public static String year = "08-2024";
-    public static String carryForwardLeave = "10";
-    public static String otherLeave = "10";
-    public static String medicalLeave = "10";
-    public static String annualLeave = "10";
-    public static String nric = "1057";
-    public static String addressOfEmployment = "10a,Boston.St";
-    public static String uen = "10540";
-    public static String employer = "ARTY_LEARNING";
-    public static String jobTitle = "Basics Teacher";
-
+    public static String teacherName = "Centre Automation Teacher";
+    public static String teacherDateOfBirth = "01-01-2000";
+    public static String teacherIdType = "16";
+    public static String teacherCitizenship = "Singaporean";
+    public static String teacherProfileImage = "\\src\\main\\java\\report\\arty.png";
+    public static String teacherEmailIdPassword = "Amudha@123";
+    public static String teacherEmailIdConfirmPwd = "Amudha@123";
+    public static String teacherShortIntroduction = "MOE Registered Teacher";
+    public static String teacherIdInput = "Yen10009";
+    public static String teacherTypeDropDown = "Temporary";
+    public static String shgTypeDropDown = "16";
+    public static String contactNumberInput = "98765432";
+    public static String addressInput = "Jurong";
+    public static String postalCodeInput = "600000";
+    public static String salary = "10000";
+    public static String salaryType = "33";
+    public static String annualLeaveInput = "5";
+    public static String medicalLeaveInput = "5";
+    public static String otherLeaveInput = "5";
+    public static String carryForwardLeave ="5";
+    public static String employerInput = "493";
+    public static String nricOfEmployee = "Yen10009";
+    public static String jobTitle = "Automation Teacher";
+    public static String mainDuties = "Teaching";
+    public static String training = "Automation Training";
+    public static String allowance = "500";
+    public static String probation = "1 month";
+    public static String payNowDetails = "98765432";
+    public static String internetBanking = "1234567890";
+    public static String terminationNotice = "1 month";
 }

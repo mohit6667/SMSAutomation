@@ -23,7 +23,6 @@ public class CentreManagementCommonMethods extends BaseClass {
 
     public static String centreAdd() throws AWTException, InterruptedException {
         js = (JavascriptExecutor) driver;
-
         // traversing to centre index page
         CentreManagementPage.centreManagementMenu.click();
         CentreManagementPage.centreListingMenu.click();
@@ -34,20 +33,21 @@ public class CentreManagementCommonMethods extends BaseClass {
         //center manager dropdown handle
         WebElement centreManagerDropDown = CentreManagementPage.centerManagerInput;
         Select selector = new Select(centreManagerDropDown);
-        selector.selectByValue("351");
+        selector.selectByValue("755");
+        CentreManagementPage.addressInput.sendKeys(CentreManagementConstants.address);
         // entering values in inputs of center add
         CentreManagementPage.zipCodeInput.sendKeys(CentreManagementConstants.zipCode);
         CentreManagementPage.mobileInput.sendKeys(CentreManagementConstants.mobile);
         CentreManagementPage.emailInput.sendKeys(CentreManagementConstants.email);
-        js.executeScript("window.scrollTo(0, document.documentElement.scrollHeight);");
+        CentreManagementPage.openingDateInput.sendKeys(CentreManagementConstants.openingDate);
+        BaseClass.waitForOneSecond();
+        js.executeScript("arguments[0].scrollIntoView(true);",CentreManagementPage.openingDateInput);
+       // js.executeScript("window.scrollTo(0, document.documentElement.scrollHeight);");
         BaseClass.waitForOneSecond();
         CentreManagementPage.gstRadioButton.click();
         CentreManagementPage.uenNumberInput.sendKeys(CentreManagementConstants.uenNumber);
         CentreManagementPage.taxRegistrationNumberInput.sendKeys(CentreManagementConstants.taxRegistrationNumber);
         BaseClass.waitForTwoSecond();
-        CentreManagementPage.openingDateInput.click();
-        CentreManagementPage.openingDateInput.click();
-        CentreManagementPage.openingDateInput.sendKeys(CentreManagementConstants.openingDate);
         CentreManagementPage.bankNameInput.sendKeys(CentreManagementConstants.bankName);
         CentreManagementPage.bankAccountNumberInput.sendKeys(CentreManagementConstants.bankAccountNumber);
         CentreManagementPage.bankAccountNameInput.sendKeys(CentreManagementConstants.bankAccountName);
@@ -57,7 +57,8 @@ public class CentreManagementCommonMethods extends BaseClass {
         Actions actions = new Actions(driver);
         Robot robot = new Robot();
         String filePath = System.getProperty("user.dir") + CentreManagementConstants.qrCodeFilePath;
-        StringSelection stringSelection = new StringSelection(filePath);
+        CentreManagementPage.qrCodeInput.sendKeys(filePath);
+    /*    StringSelection stringSelection = new StringSelection(filePath);
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
         actions.click(qrUpload).build().perform();
         BaseClass.waitForTwoSecond();
@@ -66,15 +67,14 @@ public class CentreManagementCommonMethods extends BaseClass {
         robot.keyRelease(KeyEvent.VK_CONTROL);
         robot.keyRelease(KeyEvent.VK_V);
         robot.keyPress(KeyEvent.VK_ENTER);
-        robot.keyRelease(KeyEvent.VK_ENTER);
+        robot.keyRelease(KeyEvent.VK_ENTER);*/
+        BaseClass.waitForTwoSecond();
         //save and toaster check
         js.executeScript("window.scrollTo(0, 0)");
         Thread.sleep(2000);
         CentreManagementPage.centreSaveButton.click();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         WebElement centreSaveToaster = wait.until(ExpectedConditions.visibilityOf(CentreManagementPage.centreAddToaster));
-        //boolean centreSaveToasterDisplay = centreSaveToaster.isDisplayed();
-        //Assert.assertTrue(centreSaveToasterDisplay);
         return centreSaveToaster.getText();
     }
 
@@ -114,7 +114,7 @@ public class CentreManagementCommonMethods extends BaseClass {
         return centreDeleteToaster.getText();
     }
 
-    public static boolean registrationFeesAdd() {
+    public static boolean registrationFeesAdd() throws InterruptedException {
         List<WebElement> centreListingColumnData = CentreManagementPage.centreListingColumn;
         for (WebElement centreListing : centreListingColumnData) {
             String centreNameData = centreListing.getText();

@@ -68,7 +68,7 @@ public class CentreManagementPage {
     public static WebElement effectiveDateInput;
     @FindBy(name = "amount")
     public static WebElement amountInput;
-    @FindBy(name = "taxType")
+    @FindBy(name = "taxId")
     public static WebElement taxTypeDropDown;
     @FindBy(name = "status")
     public static WebElement statusDropDown;
@@ -104,7 +104,7 @@ public class CentreManagementPage {
     public static WebElement descriptionInput;
     @FindBy(xpath = "//button[@type='submit']")
     public static WebElement classRoomSaveButton;
-    @FindBy(xpath = "//div[text()='Center ClassRooms created successfully']")
+    @FindBy(xpath = "//div[text()='Center Classroom created successfully']")
     public static WebElement classRoomSaveToaster;
     @FindBy(name = "packageName")
     public static WebElement packageNameInput;
@@ -112,7 +112,8 @@ public class CentreManagementPage {
     public static WebElement noOfLessonInput;
     @FindBy(xpath = "//button[@type='submit']")
     public static WebElement packageSaveButton;
-    @FindBy(xpath = "//div[text()='Center Packages created successfully']")
+    @FindBy(xpath = "//div[text()='Center package created successfully']")
     public static WebElement packageSaveToaster;
-
+    @FindBy(name = "address")
+    public static WebElement addressInput;
 }

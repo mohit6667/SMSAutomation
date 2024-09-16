@@ -6,67 +6,55 @@ import constants.staffing.TeacherConstants;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import page.staffing.TeacherPage;
 
-import java.awt.*;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.UUID;
 
 public class TeacherCommonMethods extends BaseClass {
     public static Select select;
-    public static JavascriptExecutor js;
 
-    public static boolean teacherAdd() throws AWTException, InterruptedException {
+    public static boolean teacherAdd() throws InterruptedException {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+        JavascriptExecutor scroll = (JavascriptExecutor) driver;
         TeacherPage.staffingMenu.click();
+        BaseClass.waitForOneSecond();
         TeacherPage.teacherMenu.click();
         TeacherPage.addTeacherButton.click();
-        TeacherPage.teacherNameInput.sendKeys(TeacherConstants.teacherName);
+        TeacherPage.teacherName.sendKeys(TeacherConstants.teacherName);
+        TeacherPage.teacherDateOfBirth.sendKeys(TeacherConstants.teacherDateOfBirth);
         BaseClass.waitForTwoSecond();
-        Actions actions2 = new Actions(driver);
-        actions2.sendKeys(TeacherPage.dateOfBirthInput, TeacherConstants.teacherDateOfBirth).build().perform();
-        //TeacherPage.dateOfBirthInput.sendKeys(TeacherConstants.teacherDateOfBirth);
-
-        select = new Select(TeacherPage.idTypeDropDown);
-        select.selectByValue("INSTAGRAM");
-        TeacherPage.idNoInput.sendKeys(TeacherConstants.teacherIdNumber);
-        select = new Select(TeacherPage.citizenshipDropDown);
-        select.selectByIndex(1);
-        // upload image
-
-        WebElement teacherProfileImage = TeacherPage.teacherProfileImage;
-        Actions actions = new Actions(driver);
-        Robot robot = new Robot();
-        String filePath = System.getProperty("user.dir") + TeacherConstants.teacherImageFile;
-        StringSelection stringSelection = new StringSelection(filePath);
-        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
-        //teacherProfileImage.click();
-        actions.click(teacherProfileImage).build().perform();
+        Select selectTeacherIdType = new Select(TeacherPage.teacherIdType);
+        selectTeacherIdType.selectByValue(TeacherConstants.teacherIdType);
+        UUID uuid = UUID.randomUUID();
+        String uuidString = uuid.toString();
+        String teacherID = uuidString.substring(0, 8);
+        TeacherPage.teacherIdNo.sendKeys(teacherID);
+        Select selectTeacherCitizenship = new Select(TeacherPage.teacherCitizenship);
+        selectTeacherCitizenship.selectByValue(TeacherConstants.teacherCitizenship);
+        String filePath = System.getProperty("user.dir") + TeacherConstants.teacherProfileImage;
+        TeacherPage.teacherProfileImage.sendKeys(filePath);
+        scroll.executeScript("window.scrollTo(0, document.documentElement.scrollHeight);");
+        String uniqueID = UUID.randomUUID().toString().substring(0, 8);
+        String uniqueEmail = uniqueID + "@gmail.com";
         BaseClass.waitForOneSecond();
-        robot.keyPress(KeyEvent.VK_CONTROL);
-        robot.keyPress(KeyEvent.VK_V);
-        robot.keyRelease(KeyEvent.VK_CONTROL);
-        robot.keyRelease(KeyEvent.VK_V);
-        robot.keyPress(KeyEvent.VK_ENTER);
-        robot.keyRelease(KeyEvent.VK_ENTER);
-        TeacherPage.maleGender.click();
-        BaseClass.waitForOneSecond();
-        js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
-        BaseClass.waitForOneSecond();
-        boolean genderRadioButton = TeacherPage.maleGender.isSelected();
-        if (!genderRadioButton) {
-            TeacherPage.maleGender.click();
-        }
+        TeacherPage.teacherEmailId.sendKeys(uniqueEmail);
+        TeacherPage.teacherEmailIdPassword.sendKeys(TeacherConstants.teacherEmailIdPassword);
+        TeacherPage.teacherEmailIdConfirmPwd.sendKeys(TeacherConstants.teacherEmailIdConfirmPwd);
+        TeacherPage.teacherGenderFemale.click();
+        TeacherPage.teacherShortIntroduction.sendKeys(TeacherConstants.teacherShortIntroduction);
+        scroll.executeScript("arguments[0].scrollIntoView(true);", TeacherPage.teacherShortIntroduction);
+        BaseClass.waitForTwoSecond();
         TeacherPage.saveAndNextButton.click();
-
-        //2nd form
-        BaseClass.waitForFourSecond();
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String dateString = currentDate.format(formatter);
+        TeacherPage.startDateOfWorking.sendKeys(dateString);
+        BaseClass.waitForOneSecond();
         driver.findElement(By.xpath("//div[@class='dropdown-heading']")).click();
         List<WebElement> optionsData = driver.findElements(By.xpath("//div[@class='dropdown-content']/div/div/ul/li/label/div/span"));
         for (WebElement option : optionsData) {
@@ -75,63 +63,62 @@ public class TeacherCommonMethods extends BaseClass {
                 break;
             }
         }
-        driver.findElement(By.xpath("//div[@class='dropdown-heading']")).click();
+        TeacherPage.teacherIdInput.sendKeys(TeacherConstants.teacherIdInput);
+        Select selectTeacherTypeDropDown = new Select(TeacherPage.teacherTypeDropDown);
+        selectTeacherTypeDropDown.selectByValue(TeacherConstants.teacherTypeDropDown);
+        Select selectShgTypeDropDown = new Select(TeacherPage.shgTypeDropDown);
+        selectShgTypeDropDown.selectByValue(TeacherConstants.shgTypeDropDown);
+        scroll.executeScript("window.scrollTo(0, document.documentElement.scrollHeight);");
+        BaseClass.waitForOneSecond();
+        TeacherPage.yesApproval.click();
         TeacherPage.workingDaysCheckbox.click();
-        TeacherPage.yesApprovalContentRequired.click();
-        TeacherPage.teacherIdInput.sendKeys(TeacherConstants.teacherIdNumber);
-        Select select = new Select(TeacherPage.teacherTypeDropDown);
-        select.selectByValue("Permanent");
-        TeacherPage.startDateInput.sendKeys(TeacherConstants.startDate);
         TeacherPage.saveAndNextButton.click();
-
-        // 2nd form
-
-        TeacherPage.emailInput.sendKeys(TeacherConstants.teacherEmail);
-        TeacherPage.contactNumberInput.sendKeys(TeacherConstants.contactNumber);
-        TeacherPage.addressInput.sendKeys(TeacherConstants.address);
-        TeacherPage.postalCodeInput.sendKeys(TeacherConstants.pinCode);
+        TeacherPage.contactNumberInput.sendKeys(TeacherConstants.contactNumberInput);
+        TeacherPage.addressInput.sendKeys(TeacherConstants.addressInput);
+        TeacherPage.postalCodeInput.sendKeys(TeacherConstants.postalCodeInput);
         TeacherPage.saveAndNextButton.click();
-
-        // 3rd form
-
-        TeacherPage.passwordInput.sendKeys(TeacherConstants.password);
-        TeacherPage.confirmPasswordInput.sendKeys(TeacherConstants.password);
+        BaseClass.waitForOneSecond();
         TeacherPage.saveAndNextButton.click();
-
-        //4th form
-        //BaseClass.waitForSixSecond();
-        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(20));
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.name("educationCertificate"))));
+        TeacherPage.salary.sendKeys(TeacherConstants.salary);
+        TeacherPage.salaryEffectiveDate.sendKeys(dateString);
+        Select selectSalaryTypeDropDown = new Select(TeacherPage.salaryType);
+        selectSalaryTypeDropDown.selectByValue(TeacherConstants.salaryType);
         TeacherPage.saveAndNextButton.click();
-
-        //5th form
-        WebDriverWait wait1 = new WebDriverWait(driver,Duration.ofSeconds(20));
-        wait1.until(ExpectedConditions.visibilityOf(driver.findElement(By.name("salary"))));
-        JavascriptExecutor scroll = (JavascriptExecutor) driver;
-        scroll.executeScript("window.scrollTo(0, document.body.scrollHeight);");
-        BaseClass.waitForTwoSecond();
-        TeacherPage.saveAndNextButton.click();
-
-        //6th form
-        wait1.until(ExpectedConditions.visibilityOf(TeacherPage.carryForwardLeave));
-        BaseClass.waitForFourSecond();
-        JavascriptExecutor jsScroll = (JavascriptExecutor) driver;
-        jsScroll.executeScript("arguments[0].scrollIntoView(true);", TeacherPage.yearInput);
-
+        int currentYear = LocalDate.now().getYear();
+        String yearString = Integer.toString(currentYear);
+        TeacherPage.yearInput.sendKeys(yearString);
+        TeacherPage.annualLeaveInput.sendKeys(TeacherConstants.annualLeaveInput);
+        TeacherPage.medicalLeaveInput.sendKeys(TeacherConstants.medicalLeaveInput);
+        TeacherPage.otherLeaveInput.sendKeys(TeacherConstants.otherLeaveInput);
         TeacherPage.carryForwardLeave.sendKeys(TeacherConstants.carryForwardLeave);
-        TeacherPage.annualLeaveInput.sendKeys(TeacherConstants.annualLeave);
-        TeacherPage.medicalLeaveInput.sendKeys(TeacherConstants.medicalLeave);
-        TeacherPage.otherLeaveInput.sendKeys(TeacherConstants.otherLeave);
-        BaseClass.waitForFourSecond();
-        //Actions actions1 = new Actions(driver);
-
-        TeacherPage.yearInput.clear();
-        TeacherPage.yearInput.click();
-        TeacherPage.yearInput.sendKeys(TeacherConstants.year);
-        BaseClass.waitForFourSecond();
-        scroll.executeScript("window.scrollTo(0, document.body.scrollHeight);");
-        BaseClass.waitForTwoSecond();
         TeacherPage.saveAndNextButton.click();
-        return false;
+        Select selectEmployerTypeDropDown = new Select(TeacherPage.employerInput);
+        selectEmployerTypeDropDown.selectByVisibleText(CentreManagementConstants.centreName);
+        BaseClass.waitForOneSecond();
+        scroll.executeScript("arguments[0].scrollIntoView(true);",TeacherPage.startDateOfWorking);
+        BaseClass.waitForOneSecond();
+        TeacherPage.nricOfEmployee.sendKeys(TeacherConstants.nricOfEmployee);
+        TeacherPage.jobTitle.sendKeys(TeacherConstants.jobTitle);
+        TeacherPage.mainDuties.sendKeys(TeacherConstants.mainDuties);
+        TeacherPage.training.sendKeys(TeacherConstants.training);
+        TeacherPage.allowance.sendKeys(TeacherConstants.allowance);
+        LocalDate lastDate = LocalDate.of(currentYear, 12, 31);
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String formattedDate = lastDate.format(formatter1);
+        String lastDateString = lastDate.toString();
+        String combinedString = yearString + " " + lastDateString;
+        TeacherPage.employeeContractEndDate.sendKeys(formattedDate);
+        TeacherPage.employeeContractEndDate.sendKeys(combinedString);
+        BaseClass.waitForOneSecond();
+        scroll.executeScript("window.scrollTo(0, document.documentElement.scrollHeight);");
+        BaseClass.waitForOneSecond();
+        TeacherPage.probation.sendKeys(TeacherConstants.probation);
+        TeacherPage.payNowDetails.sendKeys(TeacherConstants.payNowDetails);
+        TeacherPage.internetBanking.sendKeys(TeacherConstants.internetBanking);
+        TeacherPage.terminationNotice.sendKeys(TeacherConstants.terminationNotice);
+       // scroll.executeScript("arguments[0].scrollIntoView(true);", TeacherPage.terminationNotice);
+        BaseClass.waitForOneSecond();
+        TeacherPage.submitTeacherButton.click();
+        return TeacherPage.submitTeacherButton.isDisplayed();
     }
 }

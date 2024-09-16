@@ -16,6 +16,7 @@ import page.courseManagement.LevelPage;
 import page.courseManagement.SubjectPage;
 import page.leadManagement.LeadPage;
 import page.loginPage.LoginPage;
+import page.staffing.StaffPage;
 import page.staffing.TeacherPage;
 
 import java.time.Duration;
@@ -39,6 +40,7 @@ public class BaseClass {
         PageFactory.initElements(driver, ClassPage.class);
         PageFactory.initElements(driver, LeadPage.class);
         PageFactory.initElements(driver, TeacherPage.class);
+        PageFactory.initElements(driver, StaffPage.class);
 
         // Extent report initialize
         htmlReporter = new ExtentHtmlReporter(filePathForReport);

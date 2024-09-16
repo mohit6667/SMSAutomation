@@ -2,10 +2,11 @@ package constants.centreManagement;
 
 
 public class CentreManagementConstants {
-    public static String centreName = "Centre_Add";
+    public static String centreName = "Centre Automation";
     public static String centreUpdatedName = "CentreEdit";
     public static String centreCode = "0048";
     public static String zipCode = "625107";
+    public static String address = "11,A";
     public static String mobile = "9785402265";
     public static String email = "test121@gmail.com";
     public static String openingDate = "01-08-2024";
@@ -24,10 +25,9 @@ public class CentreManagementConstants {
     public static String centreBreakName = "Centre_Break_test";
     public static String fromDate = "01-08-2024";
     public static String toDate = "01-12-2024";
-    public static String classRoomName = "Class_Room_ABCD";
+    public static String classRoomName = "Automation Class Room";
     public static String classRoomCode = "C4500";
     public static String capacity = "10";
-    public static String classRoomDescription = "Automated Class Room";
-    public static String packageName = "Centre_Package_Test";
+    public static String packageName = "Automation Package";
     public static String noOfLesson = "10";
 }
