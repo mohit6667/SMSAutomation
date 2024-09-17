@@ -1,0 +1,132 @@
+package commonMethods.staffing;
+
+import base.BaseClass;
+import constants.staffing.StaffConstants;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+import page.staffing.StaffPage;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Random;
+import java.util.UUID;
+
+public class StaffCommonMethods extends BaseClass {
+    public static JavascriptExecutor js;
+    public static LocalDateTime sysDate = LocalDateTime.now();
+    public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public static int currentYear;
+    public static Select selector;
+
+    public static void staffAdd() throws InterruptedException {
+        String email = "";
+        js = (JavascriptExecutor) driver;
+        StaffPage.staffingMenu.click();
+        StaffPage.staffMenu.click();
+        BaseClass.waitForThreeSecond();
+        StaffPage.addStudentButton.click();
+        BaseClass.waitForOneSecond();
+        StaffPage.staffName.sendKeys(StaffConstants.staffName);
+        StaffPage.dob.sendKeys((StaffConstants.dob));
+        selector = new Select(StaffPage.idType);
+        selector.selectByValue("16");
+        String randomID = UUID.randomUUID().toString();
+        String staffIdNumber = randomID.substring(0, 8);
+        StaffPage.idNumber.sendKeys(staffIdNumber);
+        selector = new Select(StaffPage.citizenship);
+        selector.selectByValue("Indian");
+        String filePath = System.getProperty("user.dir") + StaffConstants.photoFilePath;
+        StaffPage.photoUpload.sendKeys(filePath);
+        js.executeScript("arguments[0].scrollIntoView(true);", StaffPage.saveButton);
+        BaseClass.waitForOneSecond();
+        selector = new Select(StaffPage.role);
+        selector.selectByValue("center_manager");
+        Random random = new Random();
+        int randomInt = random.nextInt(1000);
+        email = email.concat("Test" + randomInt + "@gmail.com");
+        StaffPage.email.sendKeys(email);
+        StaffPage.password.sendKeys(StaffConstants.password);
+        StaffPage.confirmPassword.sendKeys(StaffConstants.password);
+        StaffPage.gender.click();
+        StaffPage.staffIntro.sendKeys(StaffConstants.introduction);
+        BaseClass.waitForOneSecond();
+        StaffPage.saveButton.click();
+        BaseClass.waitForSixSecond();
+        String currentDate = sysDate.format(formatter);
+        StaffPage.startDate.sendKeys(currentDate);
+        StaffPage.staffID.sendKeys(StaffConstants.staffID);
+        js.executeScript("arguments[0].scrollIntoView(true);", StaffPage.saveButton);
+        selector = new Select(StaffPage.staffType);
+        selector.selectByIndex(1);
+        selector = new Select(StaffPage.shgType);
+        selector.selectByValue("11");
+        StaffPage.approvalRequired.click();
+        BaseClass.waitForOneSecond();
+        StaffPage.workingDayBox1.click();
+        StaffPage.workingDayBox2.click();
+        StaffPage.workingDayBox3.click();
+        StaffPage.centre.click();
+        List<WebElement> optionsData = driver.findElements(By.xpath("//div[@class='dropdown-content']/div/div/ul/li/label/div/span"));
+        BaseClass.waitForFourSecond();
+        for (WebElement option : optionsData) {
+            System.out.println(option.getText());
+            if (option.getText().equals("Testing centre")) {
+                option.click();
+                break;
+            }
+        }
+        BaseClass.waitForOneSecond();
+        StaffPage.saveButton.click();
+        BaseClass.waitForOneSecond();
+        StaffPage.contactNumber.sendKeys(StaffConstants.contactNo);
+        StaffPage.address.sendKeys(StaffConstants.address);
+        StaffPage.postalCode.sendKeys(StaffConstants.postalCode);
+        StaffPage.saveButton.click();
+        BaseClass.waitForOneSecond();
+        StaffPage.saveButton.click();
+        BaseClass.waitForOneSecond();
+        StaffPage.salary.sendKeys(StaffConstants.salary);
+        StaffPage.effectiveDate.sendKeys(currentDate);
+        selector = new Select(StaffPage.salaryType);
+        selector.selectByValue("4");
+        BaseClass.waitForOneSecond();
+        StaffPage.saveButton.click();
+        BaseClass.waitForOneSecond();
+        currentYear = sysDate.getYear();
+        StaffPage.year.sendKeys(String.valueOf(currentYear));
+        StaffPage.annualLeave.sendKeys(StaffConstants.annualLeave);
+        StaffPage.medicalLeave.sendKeys(StaffConstants.medicalLeave);
+        StaffPage.otherLeave.sendKeys(StaffConstants.otherLeave);
+        StaffPage.carryForwardLeave.sendKeys(StaffConstants.carryForwardLeave);
+        BaseClass.waitForOneSecond();
+        StaffPage.saveButton.click();
+        BaseClass.waitForSixSecond();
+        selector = new Select(StaffPage.employer);
+        selector.selectByIndex(1);
+        BaseClass.waitForOneSecond();
+        StaffPage.uen.sendKeys(StaffConstants.uen);
+        StaffPage.employmentAddress.sendKeys(StaffConstants.employmentAdd);
+        BaseClass.waitForOneSecond();
+        js.executeScript("arguments[0].scrollIntoView(true);", StaffPage.allowance);
+        StaffPage.nric.sendKeys(StaffConstants.nric);
+        StaffPage.jobTitle.sendKeys(StaffConstants.jobTitle);
+        StaffPage.mainDuties.sendKeys(StaffConstants.duties);
+        StaffPage.training.sendKeys(StaffConstants.training);
+        StaffPage.allowance.sendKeys(StaffConstants.allowance);
+        LocalDate lastDay = LocalDate.of(currentYear, 12, 31);
+        String yearEnd = lastDay.format(formatter);
+        StaffPage.contractEndDate.sendKeys(yearEnd);
+        BaseClass.waitForOneSecond();
+        StaffPage.probationPeriod.sendKeys(StaffConstants.probation);
+        StaffPage.paynowNumber.sendKeys(StaffConstants.paynow);
+        StaffPage.internetBankingNUmber.sendKeys(StaffConstants.accountNumber);
+        js.executeScript("arguments[0].scrollIntoView(true);", StaffPage.saveButton);
+        BaseClass.waitForOneSecond();
+        StaffPage.terminationPeriod.sendKeys(StaffConstants.terminationNotice);
+        StaffPage.saveButton.click();
+
+    }
+}

@@ -7,6 +7,7 @@ import commonMethods.courseManagement.ClassCommonMethods;
 import commonMethods.courseManagement.CourseCommonMethods;
 import commonMethods.courseManagement.LevelCommonMethods;
 import commonMethods.courseManagement.SubjectCommonMethods;
+import commonMethods.schedule.ScheduleCommonMethods;
 import commonMethods.staffing.TeacherCommonMethods;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -141,7 +142,19 @@ public class SMSAdminTest extends BaseClass {
             e.printStackTrace();
         }
     }
-
+    @Test(priority = 10, description = "Admin/User adding a schedule inside Schedule")
+    public void scheduleAddCheck() {
+        BaseClass.reportMethod("Schedule Add Check", "Mohit");
+        try {
+            boolean scheduleAddToaster = ScheduleCommonMethods.scheduleAdd();
+            Assert.assertTrue(scheduleAddToaster);
+            if (scheduleAddToaster) {
+                test.pass("Schedule Added Successfully");
+            }
+        } catch (Exception e) {
+            test.fail(e);
+        }
+    }
 /*
     @Test(priority = 2)
     public void leadManagement() throws InterruptedException {
