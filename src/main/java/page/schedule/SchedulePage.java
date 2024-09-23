@@ -30,5 +30,7 @@ public class SchedulePage {
     public static WebElement scheduleSubmitButton;
     @FindBy(xpath = "//div[text()='Schedule Teacher with multiple batches created successfully']")
     public static WebElement scheduleAddToaster;
+    @FindBy(xpath = "//div[@class='d-flex justify-content-center align-items-center']/div/button[@class='btn btn-sm']")
+    public static WebElement scheduleDeleteButton;
 
 }

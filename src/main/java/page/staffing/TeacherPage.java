@@ -3,7 +3,6 @@ package page.staffing;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.logging.XMLFormatter;
 
 public class TeacherPage {
 
