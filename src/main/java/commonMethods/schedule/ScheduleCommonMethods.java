@@ -13,7 +13,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import page.schedule.SchedulePage;
 
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.util.Calendar;
 
 public class ScheduleCommonMethods extends BaseClass {
@@ -25,20 +27,23 @@ public class ScheduleCommonMethods extends BaseClass {
         SchedulePage.scheduleMenu.click();
         SchedulePage.timeScheduleMenu.click();
         SchedulePage.scheduleAddButton.click();
-        BaseClass.waitForFourSecond();
+        BaseClass.waitForTwoSecond();
         select = new Select(SchedulePage.scheduleCentreDropDown);
         select.selectByVisibleText(CentreManagementConstants.centreName);
         select = new Select(SchedulePage.scheduleCourseDropDown);
         select.selectByVisibleText(CourseConstants.courseName);
         select = new Select(SchedulePage.scheduleClassDropDown);
         select.selectByVisibleText(ClassConstants.className);
-        select = new Select(SchedulePage.scheduleDaysDropDown);
-        select.selectByVisibleText("TUESDAY");
         select = new Select(SchedulePage.scheduleTeacherDropDown);
         select.selectByVisibleText(TeacherConstants.teacherName);
+        BaseClass.waitForOneSecond();
+        LocalDate today = LocalDate.now();
+        DayOfWeek dayOfWeek = today.getDayOfWeek();
+        String currentDay = dayOfWeek.toString();
+        select = new Select(SchedulePage.scheduleDaysDropDown);
+        select.selectByVisibleText(currentDay);
         select = new Select(SchedulePage.scheduleClassroomDropDown);
         select.selectByVisibleText(CentreManagementConstants.classRoomName);
-
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd:MM:yyyy");
         String formattedStartDate = formatter.format(calendar.getTime());
